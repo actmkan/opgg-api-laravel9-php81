@@ -20,6 +20,9 @@ class ChannelResource extends JsonResource
             'display_group' => $this->display_group,
             'name' => $this->name,
             'display_name' => $this->display_name,
+            'permissions' => collect($this->whenLoaded('permissions'))
+                ->keyBy('type')
+                ->mapInto(ChannelPermissionResource::class),
         ];
     }
 

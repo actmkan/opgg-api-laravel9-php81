@@ -7,6 +7,7 @@ use App\Enums\CacheKeyEnum;
 use App\Models\Channel;
 use App\Models\Talk;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Validation\ValidationException;
 
 class TalkService extends Service
 {
@@ -23,7 +24,7 @@ class TalkService extends Service
     /**
      * @param array $attribute
      * @return mixed
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function getTalk(array $attribute): mixed
     {
@@ -45,7 +46,7 @@ class TalkService extends Service
     /**
      * @param array $attribute
      * @return mixed
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function getChannels(array $attribute): mixed
     {
@@ -58,9 +59,8 @@ class TalkService extends Service
                 'id.required' => '톡 id는 필수 입력값입니다.'
             ]
         );
-
         return Cache::remember(CacheKeyEnum::GET_CHANNELS->name . "-" . $validated['id'], Constants::LIST_CACHE_EXPIRE, function () use ($validated) {
-            return Channel::where(['talk_id' => $validated['id']])->get();
+            return Channel::where(['talk_id' => $validated['id']])->with(['permissions'])->get();
         });
     }
 }
