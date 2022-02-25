@@ -39,6 +39,7 @@ class UserSeeder extends Seeder
                     'type' => 'init'
                 ]);
             }
+            dump($gradeEnum->displayName() . "유저 생성 완료");
         }
     }
 }

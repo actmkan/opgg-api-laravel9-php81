@@ -44,6 +44,7 @@ Route::prefix('talks')->group(function (){
     Route::get('/', [TalkController::class, 'getTalks']);
     Route::get('/{id}', [TalkController::class, 'getTalk']);
     Route::get('/{id}/channels', [TalkController::class, 'getChannels']);
+    Route::get('/{talkId}/channels/{channelId}/articles', [TalkController::class, 'getArticles']);
     Route::middleware('auth:sanctum')->group(function (){
         Route::get('/logout', [AuthController::class, 'logout']);
     });

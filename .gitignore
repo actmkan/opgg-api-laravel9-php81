@@ -13,3 +13,7 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+.env.production
+.env.develop
+.env.stage
+id_rsa

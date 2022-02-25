@@ -24,6 +24,8 @@ class GradeSeeder extends Seeder
             $grade->display_name = $gradeEnum->displayName();
             $grade->point = $gradeEnum->point();
             $grade->save();
+
+            dump($gradeEnum->displayName() . "생성완료");
         }
     }
 }
