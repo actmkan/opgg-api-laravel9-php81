@@ -51,12 +51,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $e): JsonResponse
     {
-        dd($e);
         return match (get_class($e)) {
             ValidationException::class => $this->errorResponse(Response::HTTP_BAD_REQUEST, $e->validator->errors()->first(), $e->validator->errors()),
             NotFoundResourceException::class => $this->errorResponse(Response::HTTP_NOT_FOUND, "요청하신 리소스가 존재하지 않습니다."),
             \Illuminate\Validation\ValidationException::class => $this->errorResponse(Response::HTTP_BAD_REQUEST, $e->validator->errors()->first(), $e->validator->errors()),
-            default => $this->errorResponse(Response::HTTP_INTERNAL_SERVER_ERROR, "오류가 발생했습니다.", [
+            default => $this->errorResponse(Response::HTTP_BAD_REQUEST, "오류가 발생했습니다.", [
                 "exception" => get_class($e),
                 "code" => $e->getCode(),
                 "message" => $e->getMessage(),

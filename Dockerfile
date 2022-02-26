@@ -1,6 +1,6 @@
 FROM ubuntu:21.10
 
-LABEL maintainer="Taylor Otwell"
+LABEL maintainer="Manki Ahn"
 WORKDIR /var/www/html
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -11,12 +11,7 @@ RUN test -n "$BUILD_ENV"
 RUN sed -i 's/archive.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
 
 RUN apt-get update \
-    && apt-get install -y gnupg gosu curl ca-certificates zip unzip git supervisor sqlite3 libcap2-bin libpng-dev python2 nginx \
-    && mkdir -p ~/.gnupg \
-    && chmod 600 ~/.gnupg \
-    && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf \
-    && apt-key adv --homedir ~/.gnupg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys E5267A6C \
-    && apt-key adv --homedir ~/.gnupg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C300EE8C \
+    && apt-get install -y curl ca-certificates zip unzip git supervisor libcap2-bin libpng-dev python2 nginx \
     && echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu impish main" > /etc/apt/sources.list.d/ppa_ondrej_php.list \
     && apt-get update \
     && apt-get install -y php8.1 php8.1-fpm php8.1-cli php8.1-dev \
@@ -31,7 +26,6 @@ RUN apt-get update \
     && php -r "readfile('https://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
     && apt-get update \
     && apt-get install -y mysql-client \
-    && apt-get install -y postgresql-client \
     && apt-get -y autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

@@ -6,6 +6,7 @@ use App\Enums\ChannelPermissionEnum;
 use App\Enums\GradeEnum;
 use App\Enums\TalkEnum;
 use App\Models\Article;
+use App\Models\ArticleWard;
 use App\Models\Channel;
 use App\Models\ChannelPermission;
 use App\Models\Comment;
@@ -102,6 +103,18 @@ class TalkSeeder extends Seeder
                 'parent_id' => $comment->id,
             ]);
             dump($comment->id . " 답글 생성 완료");
+        }
+        //답글 작성
+        foreach (User::all() as $user){
+            $articles = Article::where([
+                ['user_id', '!=', $user->id]
+            ])->get()->random(30);
+
+            $articles->map(function ($article) use($user) {
+                ArticleWard::factory()->create(['article_id' => $article->id, 'user_id' => $user->id]);
+            });
+
+            dump($user->id . " 와드 생성 완료");
         }
     }
 }

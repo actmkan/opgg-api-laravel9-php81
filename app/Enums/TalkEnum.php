@@ -6,9 +6,9 @@ namespace App\Enums;
 enum TalkEnum
 {
     case LOL;
-    case PUBG;
-    case OW;
-    case R6;
+    //case PUBG;
+    //case OW;
+    //case R6;
 
     use GetIdTrait;
 
@@ -27,31 +27,31 @@ enum TalkEnum
                 ChannelEnum::ISSUE,
                 ChannelEnum::FAN_ART,
             ],
-            self::PUBG => [
-                ChannelEnum::USER_NEWS,
-                ChannelEnum::TIP,
-                ChannelEnum::FREE,
-                ChannelEnum::ESPORTS,
-                ChannelEnum::QNA,
-                ChannelEnum::FIND_USER,
-                ChannelEnum::VIDEO,
-            ],
-            self::OW => [
-                ChannelEnum::USER_NEWS,
-                ChannelEnum::TIP,
-                ChannelEnum::FREE,
-                ChannelEnum::QNA,
-                ChannelEnum::FIND_USER,
-                ChannelEnum::VIDEO,
-                ChannelEnum::FAN_ART,
-            ],
-            self::R6 => [
-                ChannelEnum::USER_NEWS,
-                ChannelEnum::TIP,
-                ChannelEnum::FREE,
-                ChannelEnum::QNA,
-                ChannelEnum::VIDEO,
-            ],
+            //self::PUBG => [
+            //    ChannelEnum::USER_NEWS,
+            //    ChannelEnum::TIP,
+            //    ChannelEnum::FREE,
+            //    ChannelEnum::ESPORTS,
+            //    ChannelEnum::QNA,
+            //    ChannelEnum::FIND_USER,
+            //    ChannelEnum::VIDEO,
+            //],
+            //self::OW => [
+            //    ChannelEnum::USER_NEWS,
+            //    ChannelEnum::TIP,
+            //    ChannelEnum::FREE,
+            //    ChannelEnum::QNA,
+            //    ChannelEnum::FIND_USER,
+            //    ChannelEnum::VIDEO,
+            //    ChannelEnum::FAN_ART,
+            //],
+            //self::R6 => [
+            //    ChannelEnum::USER_NEWS,
+            //    ChannelEnum::TIP,
+            //    ChannelEnum::FREE,
+            //    ChannelEnum::QNA,
+            //    ChannelEnum::VIDEO,
+            //],
         };
     }
 
@@ -60,9 +60,9 @@ enum TalkEnum
         return match($this)
         {
             self::LOL => 'lol',
-            self::PUBG => 'pubg',
-            self::OW => 'ow',
-            self::R6 => 'r6',
+            //self::PUBG => 'pubg',
+            //self::OW => 'ow',
+            //self::R6 => 'r6',
         };
     }
 
@@ -71,9 +71,9 @@ enum TalkEnum
         return match($this)
         {
             self::LOL => '리그오브레전드',
-            self::PUBG => '배틀그라운드',
-            self::OW => '오버워치',
-            self::R6 => '레인보우 식스 시즈',
+            //self::PUBG => '배틀그라운드',
+            //self::OW => '오버워치',
+            //self::R6 => '레인보우 식스 시즈',
         };
     }
 

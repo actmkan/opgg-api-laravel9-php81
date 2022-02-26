@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 
-class ArticleResource extends JsonResource
+class CommentResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -20,7 +20,6 @@ class ArticleResource extends JsonResource
             'id' => $this->id,
             'talk_id' => $this->talk_id,
             'channel_id' => $this->channel_id,
-            'is_notice' => $this->is_notice,
             'user_nickname' => $this->user->nickname,
             'title' => $this->title,
             'content' => $this->content,

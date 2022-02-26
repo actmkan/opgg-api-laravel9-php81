@@ -26,4 +26,14 @@ class Article extends Model
     {
         return $this->HasMany(Comment::class);
     }
+
+    public function likes(): HasMany
+    {
+        return $this->HasMany(ArticleLike::class);
+    }
+
+    public function wards(): HasMany
+    {
+        return $this->HasMany(ArticleWard::class);
+    }
 }
