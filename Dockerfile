@@ -49,6 +49,7 @@ RUN mkdir -p -m 0600 /root/.ssh \
 
 ADD id_rsa /root/.ssh/id_rsa
 
+COPY .env.$BUILD_ENV /var/www/.env
 RUN rm -rf /var/www/html/*
 RUN git clone -b master --single-branch git@github.com:actmkan/opgg-api-laravel9-php81.git /var/www/html
 

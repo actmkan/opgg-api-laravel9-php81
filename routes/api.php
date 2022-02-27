@@ -77,3 +77,7 @@ Route::prefix('likes')->group(function (){
         Route::post('', [TalkController::class, 'like']);
     });
 });
+
+Route::get('/debug-sentry', function () {
+    throw new Exception('My first Sentry error!');
+});
