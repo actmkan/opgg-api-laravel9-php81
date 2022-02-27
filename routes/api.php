@@ -47,7 +47,33 @@ Route::prefix('talks')->group(function (){
     Route::get('/{talkId}/channels/{channelId}/articles', [TalkController::class, 'getArticles']);
     Route::get('/{talkId}/channels/{channelId}/articles/{articleId}', [TalkController::class, 'getArticle']);
     Route::get('/{talkId}/channels/{channelId}/articles/{articleId}/comments', [TalkController::class, 'getComments']);
+});
+
+/**
+ * Comments
+ */
+Route::prefix('articles')->group(function (){
     Route::middleware('auth:sanctum')->group(function (){
-        Route::get('/logout', [AuthController::class, 'logout']);
+        Route::post('', [TalkController::class, 'createArticle']);
+        Route::put('/{articleId}', [TalkController::class, 'updateArticle']);
+        Route::delete('/{articleId}', [TalkController::class, 'deleteArticle']);
+    });
+});
+
+/**
+ * Comments
+ */
+Route::prefix('comments')->group(function (){
+    Route::middleware('auth:sanctum')->group(function (){
+        Route::post('', [TalkController::class, 'createComment']);
+    });
+});
+
+/**
+ * Likes
+ */
+Route::prefix('likes')->group(function (){
+    Route::middleware('auth:sanctum')->group(function (){
+        Route::post('', [TalkController::class, 'like']);
     });
 });

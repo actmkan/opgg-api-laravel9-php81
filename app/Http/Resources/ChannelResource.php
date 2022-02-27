@@ -16,6 +16,7 @@ class ChannelResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'talk_id' => $this->talk_id,
             'group' => $this->group,
             'display_group' => $this->display_group,
             'name' => $this->name,

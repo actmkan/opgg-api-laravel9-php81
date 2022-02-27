@@ -7,10 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Article extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+
+    protected $fillable = [
+        'is_notice',
+        'is_all_notice',
+        'talk_id',
+        'channel_id',
+        'user_id',
+        'title',
+        'content',
+        'like_count',
+        'unlike_count',
+        'view_count'
+    ];
 
     public function channel(): BelongsTo
     {
@@ -27,7 +41,12 @@ class Article extends Model
         return $this->HasMany(Comment::class);
     }
 
-    public function likes(): HasMany
+    public function onLike(): HasMany
+    {
+        return $this->HasMany(ArticleLike::class);
+    }
+
+    public function onUnlike(): HasMany
     {
         return $this->HasMany(ArticleLike::class);
     }

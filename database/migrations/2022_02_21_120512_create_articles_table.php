@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('talk_id')->comment('톡 id')->index();
             $table->integer('channel_id')->comment('채널 id')->index();
             $table->bigInteger('user_id')->comment('회원 id')->index();
-            $table->string('title', 100)->comment('제목');
+            $table->string('title', 100)->comment('제목')->index();
             $table->mediumText('content')->comment('내용');
             $table->bigInteger('like_count')->comment('추천 갯수')->index();
             $table->bigInteger('unlike_count')->comment('비추천 갯수')->index();

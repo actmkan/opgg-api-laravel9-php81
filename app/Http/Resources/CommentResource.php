@@ -16,21 +16,26 @@ class CommentResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
+        $comment = [
             'id' => $this->id,
-            'talk_id' => $this->talk_id,
-            'channel_id' => $this->channel_id,
+            'article_id' => $this->article_id,
             'user_nickname' => $this->user->nickname,
-            'title' => $this->title,
             'content' => $this->content,
-            'comment_count' => $this->comments_count,
             'like_count' => $this->like_count,
             'unlike_count' => $this->unlike_count,
-            'view_count' => $this->view_count,
+            'on_like' => (bool)($this->on_like_count ?? 0),
+            'on_unlike' => (bool)($this->on_unlike_count ?? 0),
             'created_at' => $this->created_at,
-            'has_ward' => (bool)($this->wards_count ?? 0),
+            'childes' => [],
             'created_at_string' => Carbon::now()->sub($this->created_at)->diffForHumans()
         ];
+
+        //자식 n+1 방지
+        if($this->parent_id === null){
+            $comment['childes'] = new CommentResourceCollection($this->childes);
+        }
+
+        return $comment;
     }
 
 }

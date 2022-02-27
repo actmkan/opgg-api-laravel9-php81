@@ -30,6 +30,9 @@ class ArticleResource extends JsonResource
             'view_count' => $this->view_count,
             'created_at' => $this->created_at,
             'has_ward' => (bool)($this->wards_count ?? 0),
+            'same_writer' => ($this->user->id === Auth::guard('sanctum')->id()),
+            'on_like' => (bool)($this->on_like_count ?? 0),
+            'on_unlike' => (bool)($this->on_unlike_count ?? 0),
             'created_at_string' => Carbon::now()->sub($this->created_at)->diffForHumans()
         ];
     }

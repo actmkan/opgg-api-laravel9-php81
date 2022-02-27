@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -52,8 +53,11 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $e): JsonResponse
     {
         return match (get_class($e)) {
+            AuthenticationException::class => $this->errorResponse(Response::HTTP_UNAUTHORIZED, "로그인 후 이용하실 수 있는 서비스입니다."),
             ValidationException::class => $this->errorResponse(Response::HTTP_BAD_REQUEST, $e->validator->errors()->first(), $e->validator->errors()),
             NotFoundResourceException::class => $this->errorResponse(Response::HTTP_NOT_FOUND, "요청하신 리소스가 존재하지 않습니다."),
+            ManyRequestException::class => $this->errorResponse(Response::HTTP_TOO_MANY_REQUESTS, $e->getMessage()),
+            BadRequestException::class => $this->errorResponse(Response::HTTP_BAD_REQUEST, $e->getMessage()),
             \Illuminate\Validation\ValidationException::class => $this->errorResponse(Response::HTTP_BAD_REQUEST, $e->validator->errors()->first(), $e->validator->errors()),
             default => $this->errorResponse(Response::HTTP_BAD_REQUEST, "오류가 발생했습니다.", [
                 "exception" => get_class($e),

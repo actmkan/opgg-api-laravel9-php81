@@ -23,7 +23,6 @@ class Service
         );
 
         if($validator->fails()){
-            dd($validator->errors());
             throw new ValidationException($validator);
         }
 

@@ -12,11 +12,11 @@ class AuthService extends Service
 {
     /**
      * @param array $attribute
-     * @return string
+     * @return array
      * @throws \App\Exceptions\NotFoundResourceException
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function login(array $attribute): string
+    public function login(array $attribute): array
     {
         $validated = $this->validate(
             $attribute,
@@ -34,7 +34,11 @@ class AuthService extends Service
         if(Auth::attempt($validated)){
             $user = User::where(['email' => $validated['email']])->first();
             $token = $user->createToken('auth-token');
-            return $token->plainTextToken;
+
+            return [
+                'token' => $token->plainTextToken,
+                'nickname' => $user->nickname,
+            ];
         }
 
         throw new NotFoundResourceException();
