@@ -6,4 +6,7 @@ fi
 
 chmod -R ugo+rw /.composer
 
+RUN php /var/www/html/artisan optimize
+RUN php /var/www/html/artisan config:cache
+RUN php /var/www/html/artisan route:cache
 /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
