@@ -11,7 +11,10 @@ RUN test -n "$BUILD_ENV"
 RUN sed -i 's/archive.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
 
 RUN apt-get update \
-    && apt-get install -y curl ca-certificates zip unzip git supervisor libcap2-bin libpng-dev python2 nginx \
+    && apt-get install -y gnupg
+
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C
+RUN apt-get install -y curl ca-certificates zip unzip git supervisor libcap2-bin libpng-dev python2 nginx \
     && echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu impish main" > /etc/apt/sources.list.d/ppa_ondrej_php.list \
     && apt-get update \
     && apt-get install -y php8.1 php8.1-fpm php8.1-cli php8.1-dev \
