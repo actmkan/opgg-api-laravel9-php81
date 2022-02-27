@@ -202,7 +202,7 @@ class TalkService extends Service
             ])
             ->find($validated['articleId']);
 
-        $cacheKey = CacheKeyEnum::SHOW_ARTICLE->name . "_" . $article->id . "_" . Request::ip();;
+        $cacheKey = CacheKeyEnum::SHOW_ARTICLE->name . "_" . $article->id . "_" . Request::header('x-forwarded-for') ?? Request::ip();;
         if(!Cache::has($cacheKey)){
             return DB::transaction(function () use ($article, $cacheKey){
 
