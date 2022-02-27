@@ -37,7 +37,9 @@ class AuthService extends Service
 
             return [
                 'token' => $token->plainTextToken,
+                'id' => $user->id,
                 'nickname' => $user->nickname,
+                'grade_id' => $user->grade_id,
             ];
         }
 

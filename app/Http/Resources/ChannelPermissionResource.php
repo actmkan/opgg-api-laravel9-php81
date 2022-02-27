@@ -18,7 +18,7 @@ class ChannelPermissionResource extends JsonResource
     {
         return [
             'type' => $this->type,
-            'has' => $this->grade_id === null || $this->grade_id <= Auth::guard('sanctum')->user()?->grade_id,
+            'grade_id' => $this->grade_id,
             'is_writer' => (bool) $this->is_writer
         ];
     }
