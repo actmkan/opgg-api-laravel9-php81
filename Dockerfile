@@ -57,7 +57,7 @@ RUN chown -R www-data:www-data /var/www/html && chmod -R g+sw /var/www/html
 
 USER www-data
 COPY .env.$BUILD_ENV /var/www/html/.env
-RUN composer install --no-dev
+RUN composer install
 RUN chmod -R 775 /var/www/html/storage \
     && chown -R www-data:www-data /var/www/html/storage
 
